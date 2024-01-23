@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Button } from 'react-native';
 
 const App = () => {
-  const [board, setBoard] = useState(Array(9).fill(null));
+  const initialBoard = Array(9).fill(null);
+  const [board, setBoard] = useState(initialBoard);
   const [isXNext, setIsXNext] = useState(true);
 
   const handleCellPress = (index: number) => {
@@ -45,6 +46,12 @@ const App = () => {
 
     return null;
   };
+
+  const resetGame = () => {
+    setBoard(initialBoard);
+    setIsXNext(true);
+  };
+
   const renderStatus = () => {
     const winner = calculateWinner(board);
     const status = winner
@@ -75,6 +82,7 @@ const App = () => {
           {renderSquare(8)}
         </View>
       </View>
+      <Button title="Reset Game" onPress={resetGame} />
     </View>
   );
 };
