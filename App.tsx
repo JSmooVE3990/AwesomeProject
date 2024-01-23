@@ -1,13 +1,10 @@
-// Import necessary components and modules
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-// Define the Tic Tac Toe component
 const App = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
 
-  // Function to handle a cell press
   const handleCellPress = (index: number) => {
     if (board[index]) {
       return;
@@ -21,15 +18,13 @@ const App = () => {
   };
 
 
-  // Function to render the board cells
   const renderSquare = (index: number) => (
     <TouchableOpacity style={styles.square} onPress={() => handleCellPress(index)}>
       <Text style={styles.squareText}>{board[index]}</Text>
     </TouchableOpacity>
   );
 
-  // Function to determine the winner
-  const calculateWinner = (squares) => {
+  const calculateWinner = (squares: any[]) => {
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
