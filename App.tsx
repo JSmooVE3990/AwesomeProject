@@ -107,6 +107,11 @@ const styles = StyleSheet.create({
     width: 100,  // Increase the width
     height: 100, // Increase the height
   },
+  status: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
 });
 
 export default App;
