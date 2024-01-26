@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Button } from 'react-native';
 
-const Game = () => {
+const Game = ({navigation}) => {
   const initialBoard = Array(9).fill(null);
   const [board, setBoard] = useState(initialBoard);
   const [isXNext, setIsXNext] = useState(true);
@@ -83,6 +83,13 @@ const Game = () => {
         </View>
       </View>
       <Button title="Reset Game" onPress={resetGame} />
+      <View>
+      <Text>Details Screen</Text>
+      <Button
+        title="Go back to Home"
+        onPress={() => navigation.navigate('Profile')}
+      />
+    </View>
     </View>
   );
 };
