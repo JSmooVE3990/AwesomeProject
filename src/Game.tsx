@@ -84,10 +84,13 @@ const Game = ({navigation}) => {
       </View>
       <Button title="Reset Game" onPress={resetGame} />
       <View>
-      <Text>Details Screen</Text>
       <Button
-        title="Go back to Home"
+        title="Profile"
         onPress={() => navigation.navigate('Profile')}
+      />
+            <Button
+        title="Cafe"
+        onPress={() => navigation.navigate('Cafe')}
       />
     </View>
     </View>

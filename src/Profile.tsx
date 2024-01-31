@@ -1,6 +1,10 @@
 import { Button, Text, View } from "react-native"
+import { StackNavigationProp } from "@react-navigation/stack";
+import { StackParamList } from "./types/types";
 
-const Profile = ({navigation}) => {
+type ProfileScreenNavigationProp = StackNavigationProp<StackParamList, 'Profile'>;
+
+const Profile = ({ navigation }: { navigation: ProfileScreenNavigationProp })  => {
 
     return     <View>
       <Text>Details Screen</Text>
