@@ -26,21 +26,29 @@ const coffees: Coffee[] = [
 
 const Cafe = ({ navigation }: { navigation: CafeScreenNavigationProp }) => {
   const [order, setOrder] = useState<Order>({ orderCoffees: [] });
+  const [total, setTotal] = useState<number>();
+
   const menu: Menu = { menuCoffees: coffees };
+
   const onClickMenuHandler = (coffee: Coffee) => {
     setOrder((prevOrder) => ({
       orderCoffees: [...prevOrder.orderCoffees, coffee],
     }));
   };
-  console.log('Menu:', menu.menuCoffees);
-  console.log('Order:', order.orderCoffees);    return( 
+
+  const calculateTotal = (): number => {
+    let total = order.orderCoffees.reduce((total, coffee) => total + coffee.cost, 0);
+    setTotal(total);
+    return order.orderCoffees.reduce((total, coffee) => total + coffee.cost, 0);
+  };
+
+  return( 
     <View>
         {/* First Scrollable List (Menu) */}
       <View>
         <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Menu</Text>
         <FlatList
           data={menu.menuCoffees}
-          keyExtractor={(item) => item.id}
           renderItem={({ item }) => {
             console.log(item)
             return(
@@ -64,6 +72,11 @@ const Cafe = ({ navigation }: { navigation: CafeScreenNavigationProp }) => {
           )}
         />
       </View>
+      <Button
+        title="Total"
+        onPress={() => calculateTotal()}
+      />
+      <Text>{total}</Text>
       <Button
         title="Go back to Home"
         onPress={() => navigation.navigate('Home')}
