@@ -2,6 +2,7 @@ import { Button, FlatList, ScrollView, Text, TouchableOpacity, View } from "reac
 import { StackNavigationProp } from "@react-navigation/stack";
 import { StackParamList } from "./types/types";
 import { useState } from "react";
+import { Center } from "native-base";
 
 type Menu = {
   menuCoffees: Coffee[],
@@ -26,7 +27,7 @@ const coffees: Coffee[] = [
 
 const Cafe = ({ navigation }: { navigation: CafeScreenNavigationProp }) => {
   const [order, setOrder] = useState<Order>({ orderCoffees: [] });
-  const [total, setTotal] = useState<number>();
+  const [total, setTotal] = useState<number>(0);
 
   const menu: Menu = { menuCoffees: coffees };
 
@@ -37,20 +38,20 @@ const Cafe = ({ navigation }: { navigation: CafeScreenNavigationProp }) => {
   };
 
   const calculateTotal = (): number => {
-    let total = order.orderCoffees.reduce((total, coffee) => total + coffee.cost, 0);
+    let total = 0
+    total = order.orderCoffees.reduce((total, coffee) => total + coffee.cost, 0);
     setTotal(total);
     return order.orderCoffees.reduce((total, coffee) => total + coffee.cost, 0);
   };
 
   return( 
-    <View>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         {/* First Scrollable List (Menu) */}
-      <View>
+      <View style={{flex: 1, alignItems:'center'}}>
         <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Menu</Text>
         <FlatList
           data={menu.menuCoffees}
           renderItem={({ item }) => {
-            console.log(item)
             return(
             <TouchableOpacity onPress={() => onClickMenuHandler(item)}>
               <Text>{item.name}</Text>
@@ -62,25 +63,28 @@ const Cafe = ({ navigation }: { navigation: CafeScreenNavigationProp }) => {
       </View>
 
       {/* Second Scrollable List (Order) */}
-      <View >
+      <View style={{flex: 2, alignItems:'center'}}>
         <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Order</Text>
         <FlatList
           data={order.orderCoffees}
-          keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <Text>{item.name}</Text>
           )}
         />
+        <View style={{flex: 4, alignItems: 'center'}}>
+            <Button
+              title="Total"
+              onPress={() => calculateTotal()}
+            />
+            <Text>Total = {total}</Text>
+            <Button
+              title="Go back to Home"
+              onPress={() => navigation.navigate('Home')}
+            />
       </View>
-      <Button
-        title="Total"
-        onPress={() => calculateTotal()}
-      />
-      <Text>{total}</Text>
-      <Button
-        title="Go back to Home"
-        onPress={() => navigation.navigate('Home')}
-      />
+
+      </View>
+
     </View>)
     
 }
