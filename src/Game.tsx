@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Button } from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet, Button} from 'react-native';
 
 const Game = ({navigation}) => {
   const initialBoard = Array(9).fill(null);
@@ -18,9 +18,10 @@ const Game = ({navigation}) => {
     setIsXNext(!isXNext);
   };
 
-
   const renderSquare = (index: number) => (
-    <TouchableOpacity style={styles.square} onPress={() => handleCellPress(index)}>
+    <TouchableOpacity
+      style={styles.square}
+      onPress={() => handleCellPress(index)}>
       <Text style={styles.squareText}>{board[index]}</Text>
     </TouchableOpacity>
   );
@@ -39,7 +40,11 @@ const Game = ({navigation}) => {
 
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      if (
+        squares[a] &&
+        squares[a] === squares[b] &&
+        squares[a] === squares[c]
+      ) {
         return squares[a];
       }
     }
@@ -63,7 +68,7 @@ const Game = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-            {renderStatus()}
+      {renderStatus()}
 
       <View style={styles.board}>
         <View style={styles.column}>
@@ -84,15 +89,12 @@ const Game = ({navigation}) => {
       </View>
       <Button title="Reset Game" onPress={resetGame} />
       <View>
-      <Button
-        title="Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
-            <Button
-        title="Cafe"
-        onPress={() => navigation.navigate('Cafe')}
-      />
-    </View>
+        <Button
+          title="Profile"
+          onPress={() => navigation.navigate('Profile')}
+        />
+        <Button title="Cafe" onPress={() => navigation.navigate('Cafe')} />
+      </View>
     </View>
   );
 };
@@ -114,7 +116,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    
   },
   squareText: {
     fontSize: 20,
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
   },
   column: {
     borderWidth: 1,
-    width: 100,  // Increase the width
+    width: 100, // Increase the width
     height: 100, // Increase the height
   },
   status: {
