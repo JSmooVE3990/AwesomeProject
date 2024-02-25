@@ -1,7 +1,6 @@
 import {
   Button,
   FlatList,
-  ScrollView,
   Text,
   TouchableOpacity,
   View,
@@ -9,7 +8,6 @@ import {
 import {StackNavigationProp} from '@react-navigation/stack';
 import {StackParamList} from './types/types';
 import {useState} from 'react';
-import {Center} from 'native-base';
 
 type Menu = {
   menuCoffees: Coffee[];
@@ -18,7 +16,9 @@ type Menu = {
 type Order = {
   orderCoffees: Coffee[];
 };
+
 type CafeScreenNavigationProp = StackNavigationProp<StackParamList, 'Cafe'>;
+
 type Coffee = {
   name: string;
   cost: number;
@@ -28,7 +28,6 @@ const coffees: Coffee[] = [
   {name: 'Cappuccino', cost: 12},
   {name: 'Espresso', cost: 4},
   {name: 'Macchiato', cost: 6},
-  // Add more coffee items as needed
 ];
 
 const Cafe = ({navigation}: {navigation: CafeScreenNavigationProp}) => {
